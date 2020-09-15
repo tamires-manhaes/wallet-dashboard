@@ -12,13 +12,6 @@ export default createGlobalStyle`
     font-family: 'Roboto', sans-serif;
   }
 
-  :root {
-    --light-purple: #252A48;  
-    --dark-purple: #1b1f38;
-    --white: #fff;
-    --black: #000;
-  }
-
   button { cursor: pointer; }
 
 `;
