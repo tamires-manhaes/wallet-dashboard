@@ -1,13 +1,13 @@
 export default {
-  title: 'dark',
+  title: 'light',
 
   color: {
     primary: '#DCDCDC',
     secondary: '#FFFFFF',
     tertiary: '#F5F5F5',
 
-    white: '#FFF',
-    black: '#000',
+    white: '#000',
+    black: '#FFF',
     grey: '#BFBFBF',
 
     success: '#03BB85',
