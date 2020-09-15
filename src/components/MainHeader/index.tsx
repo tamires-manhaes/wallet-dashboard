@@ -4,6 +4,8 @@ import { Container, Profile, Welcome, Username } from './styles';
 
 import emojis from '../../utils/emojis';
 
+import Toggle from '../Toggle';
+
 const MainHeader: React.FC = () => {
   const emoji = useMemo(() => {
     const indice = Math.floor(Math.random() * emojis.length );
@@ -12,12 +14,13 @@ const MainHeader: React.FC = () => {
 
   return(
     <Container>
-      <h1>MainHeader</h1>
+      <Toggle />
 
       <Profile>
         <Welcome>Olar!{' '} {emoji}</Welcome>
         <Username>Tamires Lynda</Username>
       </Profile>
+      
     </Container>
   )
 }
