@@ -1,29 +1,25 @@
 import React from 'react';
-import Content from '../Content';
 
 import { Container, TitleContainer, Controllers } from './styles';
 
-const ContentHeader: React.FC = () => {
+interface IContentHeaderProps {
+  title: string,
+  lineColor: string,
+}
+
+const ContentHeader: React.FC<IContentHeaderProps> = ({ title, lineColor, children }) => {
+  // const options = [{ value: 'Tam', label: 'Tamires' }, { value: 'Br', label: 'Brooke' }, { value: 'Lol', label: 'Lola' }];
+
   return (
-    <Container>
-      <TitleContainer>
-        <h1>Titulo</h1>
+    <Container >
+      <TitleContainer lineColor={lineColor}>
+        <h1>{title}</h1>
       </TitleContainer>
 
       <Controllers>
-        <select>
-          <option value="teste">teste</option>
-          <option value="teste">teste</option>
-          <option value="teste">teste</option>
-        </select>
-
-        <select>
-          <option value="teste">teste</option>
-          <option value="teste">teste</option>
-          <option value="teste">teste</option>
-        </select>
+        { children }
       </Controllers>
-      
+
     </Container>
   )
 }
