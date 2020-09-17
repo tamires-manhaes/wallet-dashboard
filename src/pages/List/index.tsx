@@ -29,6 +29,7 @@ const List: React.FC<IRouteParams> = ({ match }) => {
   const [data, setData] = useState<IData[]>([]);
 
   const { type } = match.params;
+  
   const option = useMemo(() => {
     return type === 'entries' ? { title: 'Entradas', lineColor: '#F7931B' } : { title: 'Saídas', lineColor: '#E44C4E' };
   },[type]);
