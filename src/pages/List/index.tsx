@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import { Container, Content, Filters } from './styles';
 
@@ -6,7 +6,37 @@ import ContentHeader from '../../components/ContentHeader';
 import SelectInput from '../../components/SelectInput';
 import HistoryCard from '../../components/HistoryFinanceCard';
 
-const List: React.FC = () => {
+import gains from '../../data/gains';
+import expenses from '../../data/expenses';
+
+interface IRouteParams {
+  match: {
+    params: {
+      type: string
+    }
+  }
+}
+
+interface IData {
+  description: string,
+  amount: string ,
+  frequency: string,
+  date: string,
+  tagColor: string
+}
+
+const List: React.FC<IRouteParams> = ({ match }) => {
+  const [data, setData] = useState<IData[]>([]);
+
+  const { type } = match.params;
+  const option = useMemo(() => {
+    return type === 'entries' ? { title: 'Entradas', lineColor: '#F7931B' } : { title: 'Saídas', lineColor: '#E44C4E' };
+  },[type]);
+
+  const listData = useMemo(() => {
+    return type === 'entries' ? gains : expenses;
+  },[type]);
+
   const months = [
     { value: 0, label: 'Mês' }, 
     { value: 3, label: 'Março' }, 
@@ -28,11 +58,24 @@ const List: React.FC = () => {
     { value: 2018, label: '2018' },
     { value: 2019, label: '2019' },
     { value: 2020, label: '2020' },
-  ]
+  ];
+
+  useEffect(() => {
+    const response = listData.map(item => {
+      return {
+        description : item.description,
+        amount: item.amount,
+        frequency: item.frequency,
+        date: item.date,
+        tagColor: item.frequency === 'recorrente' ? '#4E41F0' : '#E44C4E'
+      }
+    })
+    setData(response)
+  },[type]);
 
   return (
     <Container>
-      <ContentHeader title="Entradas" lineColor="#E44FCE">
+      <ContentHeader title={option.title} lineColor={option.lineColor}>
         <SelectInput options={months}/>
         <SelectInput options={years}/>
       </ContentHeader>
@@ -43,15 +86,12 @@ const List: React.FC = () => {
       </Filters>
 
       <Content>
-        <HistoryCard tagColor="#F7931B" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#E44FCE" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#E44C4E" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#F7931B" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#E44C4E" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#E44FCE" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#F7931B" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#E44FCE" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
-        <HistoryCard tagColor="#E44C4E" title="Running shoes" subtitle="15/09/2020" amount="$500"/>
+        {  
+          data.map((item, index) => (
+            <HistoryCard key={index} tagColor={item.tagColor} title={item.description} subtitle={item.date} amount={item.amount}/> 
+          ))
+
+        }
       </Content>
     </Container>
   )
