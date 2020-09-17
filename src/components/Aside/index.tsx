@@ -2,7 +2,6 @@ import React from 'react';
 import { MdDashboard, MdArrowDownward, MdArrowUpward, MdExitToApp } from 'react-icons/md';
 
 import { Container, Header, Logo, Title, Menu, MenuItem, MenuLink} from './styles';
-
 import LogoImg from '../../assets/logo.svg';
 
 const Aside: React.FC = () => {
@@ -15,21 +14,21 @@ const Aside: React.FC = () => {
       
       <Menu>
         <MenuItem>
-          <MenuLink href="#">
+          <MenuLink href="/dashboard">
             <MdDashboard /> 
             Dashboard
           </MenuLink>
         </MenuItem>
 
         <MenuItem>
-          <MenuLink href="#">
+          <MenuLink href="/list/entries">
             <MdArrowUpward /> 
             Entradas
           </MenuLink>
         </MenuItem>
 
         <MenuItem>
-          <MenuLink href="#">
+          <MenuLink href="/list/exits">
             <MdArrowDownward /> 
             Saídas
           </MenuLink>
