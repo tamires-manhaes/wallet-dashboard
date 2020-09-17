@@ -8,8 +8,7 @@ interface IContentHeaderProps {
 }
 
 const ContentHeader: React.FC<IContentHeaderProps> = ({ title, lineColor, children }) => {
-  // const options = [{ value: 'Tam', label: 'Tamires' }, { value: 'Br', label: 'Brooke' }, { value: 'Lol', label: 'Lola' }];
-
+  
   return (
     <Container >
       <TitleContainer lineColor={lineColor}>
