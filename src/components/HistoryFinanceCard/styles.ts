@@ -31,6 +31,11 @@ export const Container = styled.li`
     flex-direction: column;
     justify-content: space-between;
     padding-left: 15px;
+
+    span {
+      font-weight: 700;
+      font-size: 18px;
+    }
   }
 `;
 
