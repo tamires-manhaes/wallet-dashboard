@@ -9,7 +9,7 @@ const Dashboard: React.FC = () => {
   
   return (
     <Container>
-      <ContentHeader title="Dashboard" lineColor="#fff">
+      <ContentHeader title="Dashboard" lineColor="#313862">
         <SelectInput options={options}/>
       </ContentHeader>
     </Container>
