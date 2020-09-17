@@ -1,16 +1,12 @@
 import styled from 'styled-components';
 
-interface iContainerProps {
-  color: string,
-}
-
 interface iTagPros {
   color: string,
 }
 
-export const Container = styled.li<iContainerProps>`
+export const Container = styled.li`
   position: relative;
-  background: ${props => props.color};
+  background: ${props => props.theme.colors.tertiary};
   list-style: none;
 
   padding: 10px 15px;
@@ -44,6 +40,6 @@ export const Tag = styled.div<iTagPros>`
   top: 50%;
   left: 0;
   transform: translate(0%, -50%);
-  width: 8px;
+  width: 5px;
   height: 60%;
 `;
