@@ -27,6 +27,8 @@ interface IData {
 
 const List: React.FC<IRouteParams> = ({ match }) => {
   const [data, setData] = useState<IData[]>([]);
+  const [monthSelected, setMonthSelected] = useState<string>(String( new Date().getMonth() + 1 ));
+  const [yearSelected, setYearSelected] = useState<string>(String( new Date().getFullYear() ));
 
   const { type } = match.params;
   
@@ -40,6 +42,8 @@ const List: React.FC<IRouteParams> = ({ match }) => {
 
   const months = [
     { value: 0, label: 'Mês' }, 
+    { value: 1, label: 'Janeiro' }, 
+    { value: 2, label: 'Fevereiro' }, 
     { value: 3, label: 'Março' }, 
     { value: 4, label: 'Abril' }, 
     { value: 5, label: 'Maio' },
@@ -62,7 +66,15 @@ const List: React.FC<IRouteParams> = ({ match }) => {
   ];
 
   useEffect(() => {
-    const response = listData.map(item => {
+    const filteredDate = listData.filter(item => {
+      const date = new Date(item.date);
+      const month = String(date.getMonth() + 1);
+      const year = String(date.getFullYear());
+      
+      return monthSelected === month && yearSelected === year;
+    });
+
+    const response = filteredDate.map(item => {
       return {
         description : item.description,
         amount: item.amount,
@@ -70,15 +82,15 @@ const List: React.FC<IRouteParams> = ({ match }) => {
         date: item.date,
         tagColor: item.frequency === 'recorrente' ? '#4E41F0' : '#E44C4E'
       }
-    })
-    setData(response)
-  },[type]);
+    });
+    setData(response);
+  },[listData, monthSelected, yearSelected]);
 
   return (
     <Container>
       <ContentHeader title={option.title} lineColor={option.lineColor}>
-        <SelectInput options={months}/>
-        <SelectInput options={years}/>
+        <SelectInput options={months} onChange={(e) => setMonthSelected(e.target.value)} defaultValue={monthSelected}/>
+        <SelectInput options={years} onChange={(e) => setYearSelected(e.target.value)} defaultValue={yearSelected}/>
       </ContentHeader>
 
       <Filters>
